@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DAL.Entities;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +10,7 @@ namespace DAL
 {
     public interface IApplicationDbContext
     {
+        public DbSet<Hotel> Hotels{ get; set; }
         public int SaveChanges();
 
     }
