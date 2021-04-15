@@ -1,4 +1,5 @@
 using DAL;
+using DAL.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -7,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Linq;
 
 namespace CSHW4
 {
@@ -56,7 +58,7 @@ namespace CSHW4
             }
 
             app.UseRouting();
-
+            //SeedDefault(app);
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -76,6 +78,25 @@ namespace CSHW4
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+        }
+
+        private void SeedDefault(IApplicationBuilder app)
+        {
+            var ScopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
+            using (var scope = ScopeFactory.CreateScope())
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                if (dbContext.Hotels.FirstOrDefault(u => u.HotelName == "Hotel 1") == null)
+                {
+                    for (int i = 0; i < 5; i++)
+                    {
+                        dbContext.Hotels.Add(new Hotel { HotelName = "Hotel " + i, RoomRate =  i, RoomStatus = i});
+
+                    }
+                    dbContext.SaveChanges();
+
+                }
+            }
         }
     }
 }

@@ -16,5 +16,6 @@ namespace DAL
         }
 
         public DbSet<Hotel> Hotels { get; set; }
+        public DbSet<Room> Rooms { get; set; }
     }
 }

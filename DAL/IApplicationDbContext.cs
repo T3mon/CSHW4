@@ -11,6 +11,7 @@ namespace DAL
     public interface IApplicationDbContext
     {
         public DbSet<Hotel> Hotels{ get; set; }
+        public DbSet<Room> Rooms{ get; set; }
         public int SaveChanges();
 
     }
