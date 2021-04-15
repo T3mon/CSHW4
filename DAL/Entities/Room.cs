@@ -15,6 +15,7 @@ namespace DAL.Entities
         [Range(0, 5)]
         public int RoomStatus { get; set; }
         public decimal RoomRate { get; set; }
+
         public string HotelId { get; set; }
     }
 }

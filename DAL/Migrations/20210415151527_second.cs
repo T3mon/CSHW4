@@ -6,6 +6,8 @@ namespace DAL.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            
+
             migrationBuilder.CreateTable(
                 name: "Rooms",
                 columns: table => new
@@ -28,9 +30,17 @@ namespace DAL.Migrations
 
             migrationBuilder.Sql(@"
                 INSERT INTO Rooms(Id, RoomStatus, RoomRate, HotelId)
-                SELECT Hotels.Id, Hotels.RoomStatus, Hotels.RoomRate, Hotels.Id
+                SELECT NEWID(), Hotels.RoomStatus, Hotels.RoomRate, Hotels.Id
                 FROM Hotels
                 ");
+
+            migrationBuilder.DropColumn(
+                name: "RoomRate",
+                table: "Hotels");
+
+            migrationBuilder.DropColumn(
+                name: "RoomStatus",
+                table: "Hotels");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Rooms_HotelId",
@@ -40,11 +50,30 @@ namespace DAL.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AddColumn<int>(
+                name: "RoomStatus",
+                table: "Hotels",
+                type: "int",
+                nullable: false,
+                defaultValue: 0);
+
+            migrationBuilder.AddColumn<decimal>(
+                name: "RoomRate",
+                table: "Hotels",
+                type: "decimal(18,2)",
+                nullable: false,
+                defaultValue: 0m);
+
+            
+
             migrationBuilder.Sql(@"
-                INSERT INTO Hotels(Id, RoomStatus, RoomRate,)
-                SELECT Rooms.Id, Rooms.RoomStatus, Rooms.RoomRate, Rooms.Id
+                INSERT INTO Hotels(Id, RoomStatus, RoomRate)
+                SELECT NEWID(), Rooms.RoomStatus, Rooms.RoomRate
                 FROM Rooms
                 ");
+
+            
+
 
             migrationBuilder.DropTable(
                 name: "Rooms");

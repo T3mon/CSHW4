@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210415145324_second")]
+    [Migration("20210415151527_second")]
     partial class second
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,12 +28,6 @@ namespace DAL.Migrations
 
                     b.Property<string>("HotelName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("RoomRate")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("RoomStatus")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

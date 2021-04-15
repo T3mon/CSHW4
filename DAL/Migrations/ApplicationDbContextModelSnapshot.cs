@@ -27,12 +27,6 @@ namespace DAL.Migrations
                     b.Property<string>("HotelName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("RoomRate")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("RoomStatus")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.ToTable("Hotels");

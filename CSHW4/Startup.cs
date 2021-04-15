@@ -88,12 +88,12 @@ namespace CSHW4
                 var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
                 if (dbContext.Hotels.FirstOrDefault(u => u.HotelName == "Hotel 1") == null)
                 {
-                    for (int i = 0; i < 5; i++)
-                    {
-                        dbContext.Hotels.Add(new Hotel { HotelName = "Hotel " + i, RoomRate =  i, RoomStatus = i});
+                    //for (int i = 0; i < 5; i++)
+                    //{
+                    //    dbContext.Hotels.Add(new Hotel { HotelName = "Hotel " + i, RoomRate =  i, RoomStatus = i});
 
-                    }
-                    dbContext.SaveChanges();
+                    //}
+                    //dbContext.SaveChanges();
 
                 }
             }
